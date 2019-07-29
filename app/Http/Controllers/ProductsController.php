@@ -391,6 +391,10 @@ class ProductsController extends Controller
 
     }
 
+    public function getAllCategory(){
+
+    }
+
     public function createNewCategory(Request $request){
 
         if(empty($request->title)){
@@ -402,11 +406,12 @@ class ProductsController extends Controller
 
         $cat = category::create([
             "name" => $request->title,
-            "id" => Str::random()
+            "category_id" => Str::random()
         ]);
 
         return response()->json([
             "error" => 0,
+            "success" => "Category Added",
             "newCategory" => $cat
         ]);
 
