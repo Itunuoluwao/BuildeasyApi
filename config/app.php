@@ -166,6 +166,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,
 
+
         /*
          * Package Service Providers...
          */
