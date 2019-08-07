@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 */
 header("Access-Control-Allow-Origin: *");
 header('Access-Control-Allow-Methods: *');
-header('Access-Control-Max-Age: 200');
+header('Access-Control-Max-Age: 0');
 header('Access-Control-Allow-Credentials: false');
 header('Access-Control-Allow-Headers: *');
 
