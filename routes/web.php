@@ -74,6 +74,8 @@ Route::group(['guard' => 'auth:api'], function(){
     Route::post('/api/getCloserSupplier', 'ApiController@getCloserSupplier')->middleware('ApiKey');
     Route::post('/api/uploadImage', 'ApiController@UploadImage')->middleware('ApiKey');
     Route::post('/api/createUser', 'ApiController@createUser')->middleware('ApiKey');
+    Route::post('/api/authenticateUser', 'ApiController@authenticate')->middleware('ApiKey');
+    Route::get('/api/getAuthenticated', 'ApiController@getAuthenticated')->middleware('ApiKey');
     Route::get('/api/getSupplierImages', 'ApiController@getSupplierImages')->middleware('ApiKey');
     Route::get('/api/sendSms', 'ApiController@sendSms');
     Route::post('/testAngular', 'ApiController@testAngular')->middleware('ApiKey');

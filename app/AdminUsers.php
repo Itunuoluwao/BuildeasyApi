@@ -5,8 +5,9 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class AdminUsers extends Authenticatable implements  MustVerifyEmail
+class AdminUsers extends Authenticatable implements  MustVerifyEmail, JWTSubject
 {
     use Notifiable;
 
@@ -27,4 +28,15 @@ class AdminUsers extends Authenticatable implements  MustVerifyEmail
     protected $hidden = [
         'password', 'remember_token','api_key'
     ];
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
 }

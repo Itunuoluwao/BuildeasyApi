@@ -19,6 +19,8 @@ use JD\Cloudder\Facades\Cloudder;
 use PHPUnit\Runner\Exception;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use Whoops\Exception\ErrorException;
 
 class ApiController extends Controller
@@ -30,6 +32,70 @@ class ApiController extends Controller
     public function index(){
 
     }
+
+
+    public function authenticate(Request $request){
+
+        $data['email'] = $request->json('email');
+        $data['password'] = $request->json('password');
+
+        try{
+            if(!$token = Auth::guard('api_admin')->attempt($data)){
+                return response()->json(['error' => 1,'error_message' => 'User not found', 'extra' => bcrypt($data['password'])], 400);
+
+            }
+            return response()->json([
+                'message' => 'Authenticated',
+                'error' => 0,
+                'token' => $token
+            ]);
+
+
+        }catch(JWTException $e){
+            return response()->json([
+                    'error' => 1,
+                    'error_message' => 'could_not_create_token'
+                ]
+                , 500);
+
+        }
+
+
+
+
+
+    }
+    public function getAuthenticated(Request $request){
+
+
+
+        try{
+            if(!$user = JWTAuth::parseToken()->authenticate()){
+                return response()->json(['error' => 1,'error_message' => 'User not found'], 400);
+
+            }
+        }catch(JWTException $e){
+            return response()->json([
+                    'error' => 1,
+                    'error_message' => 'issue with server'. $e->getMessage()
+                ]
+                , 500);
+
+        }
+
+
+
+
+        return response()->json([
+            'message' => 'Authenticated',
+            'error' => 0,
+            'user' => $user
+        ]);
+
+
+
+    }
+
 
     public function getDistance(Request $request){
 
