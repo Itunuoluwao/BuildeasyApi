@@ -70,6 +70,8 @@ class ApiController extends Controller
 
 
         try{
+            Auth::shouldUse('api_admin');
+
             if(!$user = JWTAuth::parseToken()->authenticate()){
                 return response()->json(['error' => 1,'error_message' => 'User not found'], 400);
 
@@ -105,7 +107,7 @@ class ApiController extends Controller
         $des = $input['des'];
         $url = $this->google_base_Url.'?origin='.$origin.'&destinations='.$des.'&mode=driving$language=en&key='.$this->api_key;
 
-        $response =  file_get_contents($this->google_base_Url.'?origins='.$origin.'&destinations='.$des.'&mode=Driving&language=fr-FR&key='.$this->api_key);
+        $response =  file_get_contents($this->google_base_Url.'?origins='.$origin.'&destinations='.$des.'&mode=Driving&language=fr-FR&key=AIzaSyCoHhq-078QaLuiSUWMyBhT-DbXhHLHjwA');
 
         return response()->json([
             'result' => json_decode($response)
@@ -118,30 +120,41 @@ class ApiController extends Controller
         $api_key =  env('googleKey');
 
 
-        $supplier = Supplier::all();
+        $supplier = Supplier::where("status", "=", "InActive")->get();
         $responceArray = array();
 
-        for($i = 0; $i < count($supplier);$i++){
-           try{
-               $responce = file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?origins=place_id:'.$supplier[$i]['place_id'].'&destinations='.$data['destination'].'&mode=Driving&language=fr-FR&key='.$api_key);
+        if(count($supplier) < 1){
 
-           }catch(\Exception $e){
-               return response()->json([
-                   'error' => 1,
-                   'error_message' => $e->getMessage(),
-               ]);
-           }
-            $distance = json_decode($responce, true);
-            $value = $distance['rows'][0]['elements'][0]['duration']['value'] ?? '';
-            $valueArray  = array('distance' => $value,'data' => $distance,'supplier_details' => $supplier[$i]);
+            return response()->json([
+               "error" => 1,
+                "error_message" => "No available Supplier at the Moment"
+            ],402);
 
-            $responceArray = array_add($responceArray,$i,$valueArray);
+        }else{
+
+            for($i = 0; $i < count($supplier);$i++){
+                try{
+                    $responce = file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?origins=place_id:'.$supplier[$i]['place_id'].'&destinations='.$data['destination'].'&mode=Driving&language=fr-FR&key='.$api_key);
+
+                }catch(\Exception $e){
+                    return response()->json([
+                        'error' => 1,
+                        'error_message' => $e->getMessage(),
+                    ]);
+                }
+                $distance = json_decode($responce, true);
+                $value = $distance['rows'][0]['elements'][0]['duration']['value'] ?? '';
+                $valueArray  = array('distance' => $value,'data' => $distance,'supplier_details' => $supplier[$i]);
+
+                $responceArray = array_add($responceArray,$i,$valueArray);
+            }
+
+
+            return response()->json([
+                'results' => min($responceArray)
+            ]);
+
         }
-
-
-        return response()->json([
-            'results' => min($responceArray)
-        ]);
 
     }
 

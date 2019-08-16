@@ -130,7 +130,7 @@ class OrdersController extends Controller
             return response()->json([
                 'error' => 1,
                 'error_message' => $validator->errors()
-            ]);
+            ],400);
         }else {
 
             try {
@@ -170,7 +170,7 @@ class OrdersController extends Controller
                              return response()->json([
                                  'error' => 1,
                                  'error_message' => 'this order '.$order->title.' is still been proccesed'
-                             ]);
+                             ], 400);
                            }else{
                                $newOrder = Orders::firstOrCreate([
                                    'order_id' => $this->generateRandomNumber(15),
@@ -189,14 +189,7 @@ class OrdersController extends Controller
                                    'destination' => $data['destination']
                                ]);
 
-                               $user = User::where('user_id', '=', $newOrder['supplier_id'])->get();
 
-                               $details = [
-                                   'greeting' => 'Hi'.$user['company Name'],
-                                   'body' => 'One order is need your assistance immediately'
-                               ];
-
-                               Notification::send($user, new OrderPaid($details));
 
                                return response()->json([
                                    'error' => 0,
@@ -214,7 +207,7 @@ class OrdersController extends Controller
                           return response()->json([
                                'error' => 1,
                                'error-message' => $e->getMessage()
-                           ]);
+                           ],400);
                        }
 
 
@@ -222,7 +215,7 @@ class OrdersController extends Controller
                         return response()->json([
                             'error' => 1,
                             'error_message' => 'could not  connect. Try again later'
-                        ]);
+                        ],400);
                     }
 
 
@@ -232,7 +225,7 @@ class OrdersController extends Controller
                     return response()->json([
                         'error' => 1,
                         'error_message' => 'Unable to find product'
-                    ]);
+                    ],400);
                 }
 
 
@@ -240,7 +233,7 @@ class OrdersController extends Controller
                 return response()->json([
                     'error' => 1,
                     'error_message' => $e->getMessage()
-                ]);
+                ],400);
             }
         }
 

@@ -27,8 +27,10 @@ class CreateCustomersTable extends Migration
             $table->string('firstName');
             $table->string('LastName');
             $table->string('CompanyName')->nullable()->default(null);
+            $table->bigInteger('phone_number')->nullable()->default(null);
             $table->string('country');
             $table->string('city');
+            $table->string('local_government');
             $table->string('community');
             $table->integer('zip');
             $table->text('address1');

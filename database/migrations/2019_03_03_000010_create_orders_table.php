@@ -24,11 +24,16 @@ class CreateOrdersTable extends Migration
             $table->engine = 'MyISAM';
             $table->increments('id');
             $table->string('order_id');
+            $table->string('product_id');
             $table->string('title');
             $table->decimal('price', 8, 2);
             $table->string('status');
+            $table->string('token');
+            $table->string('total_price');
             $table->string('buyer');
+            $table->string('buyer_id');
             $table->string('destination');
+            $table->string('distance_matrix');
             $table->integer('quantity');
             $table->string('valuation');
             $table->string('supplier_id')->nullable()->default(null);

@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -15,6 +16,8 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class CustomersController extends Controller
 {
+
+
     public function index(Request $request){
 
         try{
@@ -181,7 +184,11 @@ class CustomersController extends Controller
 
 
         try{
-           if(!$user = JWTAuth::parseToken()->authenticate()){
+
+
+            Auth::shouldUse('api');
+
+            if(!$user = JWTAuth::parseToken()->authenticate()){
                return response()->json(['error' => 1,'error_message' => 'User not found'], 400);
 
            }
@@ -195,12 +202,13 @@ class CustomersController extends Controller
         }
 
 
+        $currentUser = Customers::where("user_id", "=", $user['user_id'])->first();
 
 
         return response()->json([
             'message' => 'Authenticated',
             'error' => 0,
-            'user' => $user
+            'user' => $currentUser
         ]);
 
 
@@ -212,6 +220,7 @@ class CustomersController extends Controller
 
 
             try{
+                Auth::shouldUse('api');
                 if(!$user = JWTAuth::parseToken()->authenticate()){
                     return response()->json(['error' => 1,'error_message' => 'User not found'], 400);
                 }
@@ -225,14 +234,14 @@ class CustomersController extends Controller
                     "firstName" => $name[0],
                     "LastName" => $name[1],
                     "phone_number" => $data['phone_number'],
-                    "companyName" => $data['companyName'],
+                    "CompanyName" => $data['companyName'],
                     'community' => $data['locality'],
                     "country" => $data['country'],
-                    "city" => $data['city'],
+                    "city" => $data['state'],
                     "zip" => 0,
                     "address1" => $data['mainAddress'],
                     "address2" => $data['address2'],
-                    "local_government" => $data['local_government']
+                    "local_government" => $data['route']
                 ]);
 
                 return response()->json([
@@ -245,7 +254,7 @@ class CustomersController extends Controller
             }catch(JWTException $e){
                 return response()->json([
                         'error' => 1,
-                        'error_message' => 'issue with server'
+                        'error_message' => 'issue with server'. $e->getMessage()
                     ]
                     , 500);
 
@@ -256,7 +265,7 @@ class CustomersController extends Controller
         }catch(\Exception $e){
             return response()->json([
                     'error' => 1,
-                    'error_message' => 'issue with server'
+                    'error_message' => 'issue with server'. $e->getMessage()
                 ]
                 , 500);
 

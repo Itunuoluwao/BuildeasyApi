@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customers extends Model {
 
-    protected $fillable = array('user_id','firstName','LastName','local_government','phone_number','CompanyName','country','city','community','zip','address1','address2');
+    protected $fillable = array('user_id','firstName','phone_number','local_government','LastName','local_government','phone_number','CompanyName','country','city','community','zip','address1','address2');
 
 
 
