@@ -13,7 +13,7 @@ return [
     */
 
     'supportsCredentials' => true,
-    'allowedOrigins' => ['http://buildeasy-supplier.herokuapp.com', 'http://localhost:8080','https://buildeasy-customer.herokuapp.com'],
+    'allowedOrigins' => ['http://buildeasy-supplier.herokuapp.com'],
     'allowedHeaders' => ['*'],
     'allowedMethods' =>  ['GET', 'POST', 'PUT',  'DELETE','INCLUDE'],
     'exposedHeaders' => [],

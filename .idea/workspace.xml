@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f11ec196-1a20-4b9d-bb99-b8f8e4a25804" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/AdminUsers.php" afterPath="$PROJECT_DIR$/app/AdminUsers.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Customers.php" afterPath="$PROJECT_DIR$/app/Customers.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ApiController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ApiController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/CustomersController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/CustomersController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/OrdersController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrdersController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Supplier.php" afterPath="$PROJECT_DIR$/app/Supplier.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/orders.php" afterPath="$PROJECT_DIR$/app/orders.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2019_03_03_000000_create_customers_table.php" afterPath="$PROJECT_DIR$/database/migrations/2019_03_03_000000_create_customers_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2019_03_03_000010_create_orders_table.php" afterPath="$PROJECT_DIR$/database/migrations/2019_03_03_000010_create_orders_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/cors.php" afterPath="$PROJECT_DIR$/config/cors.php" />
     </list>
     <ignored path="buildeasyApi.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -74,7 +65,7 @@
         <entry file="file://$PROJECT_DIR$/config/cors.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.43965518">
-              <caret line="15" column="121" selection-start-line="15" selection-start-column="121" selection-end-line="15" selection-end-column="121" />
+              <caret line="15" column="66" selection-start-line="15" selection-start-column="66" selection-end-line="15" selection-end-column="66" />
               <folding />
             </state>
           </provider>
@@ -187,7 +178,6 @@
         <option value="$PROJECT_DIR$/routes/api.php" />
         <option value="$PROJECT_DIR$/app/Http/Kernel.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
-        <option value="$PROJECT_DIR$/config/cors.php" />
         <option value="$PROJECT_DIR$/app/User.php" />
         <option value="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" />
         <option value="$PROJECT_DIR$/config/jwt.php" />
@@ -201,6 +191,7 @@
         <option value="$PROJECT_DIR$/database/migrations/2019_03_03_000010_create_orders_table.php" />
         <option value="$PROJECT_DIR$/app/Supplier.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/OrdersController.php" />
+        <option value="$PROJECT_DIR$/config/cors.php" />
       </list>
     </option>
   </component>
@@ -914,7 +905,7 @@
     <entry file="file://$PROJECT_DIR$/config/cors.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.43965518">
-          <caret line="15" column="121" selection-start-line="15" selection-start-column="121" selection-end-line="15" selection-end-column="121" />
+          <caret line="15" column="66" selection-start-line="15" selection-start-column="66" selection-end-line="15" selection-end-column="66" />
           <folding />
         </state>
       </provider>
