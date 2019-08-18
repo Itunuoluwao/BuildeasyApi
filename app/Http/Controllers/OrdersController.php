@@ -185,7 +185,7 @@ class OrdersController extends Controller
                                    'price' => $data['price'],
                                    'valuation' => $product['valuation'],
                                    'title' => $this->generateRandomNumber(5),
-                                   'status' => 0,
+                                   'status' => 2,
                                    'destination' => $data['destination']
                                ]);
 

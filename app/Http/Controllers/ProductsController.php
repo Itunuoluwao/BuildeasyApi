@@ -261,7 +261,7 @@ class ProductsController extends Controller
         if(!isset($request->supplier_id)){
             return response()->json([
                 'message' => 'No supplier_id specified'
-            ]);
+            ], 500);
         }else{
             $supplierProducts = products::where('supplier_id', '=', $request->supplier_id)->get();
 
@@ -269,7 +269,7 @@ class ProductsController extends Controller
 
                 return response()->json([
                     'message' => "No products from this Supplier"
-                ]);
+                ], 500);
 
             }else{
 
