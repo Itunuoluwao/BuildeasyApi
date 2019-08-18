@@ -37,11 +37,10 @@ return [
 
 
     'twilio' => [
-        'username' => env('TWILIO_USERNAME'), // optional when using auth token
-        'password' => env('TWILIO_PASSWORD'), // optional when using auth token
-        'auth_token' => env('TWILIO_AUTH_TOKEN'), // optional when using username and password
         'account_sid' => env('TWILIO_ACCOUNT_SID'),
-        'from' => env('TWILIO_FROM'), // optional
+        'password' => env('TWILIO_AUTH_TOKEN'),
+        'username' => env('TWILIO_USERNAME', ''),
+        'from' => env('TWILIO_SMS_FROM_NUMBER')
     ],
 
 ];
