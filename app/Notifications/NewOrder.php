@@ -57,11 +57,6 @@ class NewOrder extends Notification
             ->content("Hi {$this->details->name}. Your account was approved!");
     }
 
-    public function routeNotificationForTwilio()
-    {
-        return '+2348053870717';
-    }
-
     /**
      * Get the array representation of the notification.
      *
