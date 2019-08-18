@@ -7,7 +7,6 @@ use App\Notifications\NewOrder;
 use App\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
-use Twilio\Exceptions\TwilioException;
 
 class HomeController extends Controller
 {
@@ -44,16 +43,7 @@ class HomeController extends Controller
             'order_id' => '293930022ijduc9d'
         ];
 
-       try{
-           $to_phone_number = '+2348053870717'; // who are you sending to?
-
-
-           Notification::route("twilio", $to_phone_number)->notify(new NewOrder($details));
-
-
-       }catch(\Exception $e){
-           dd($e);
-       }
+        Notification::send($user, new NewOrder($details));
 
         return response()->json(["noti" => $user->notifications]);
     }
@@ -61,8 +51,8 @@ class HomeController extends Controller
         $user = Supplier::first();
 
         try{
-            $account_id = 'AC0ff717e2079425430f4a2cb180bac6cc';
-            $auth_token = '514cecec182eb508ea4105c0ed584a85';
+            $account_id = env('TWILIO_ACCOUNT_SID');
+            $auth_token = env('TWILIO_AUTH_TOKEN');
             $from_phone_number = '+15306658889'; // phone number you've chosen from Twilio
             $twilio = new Twilio($account_id, $auth_token, $from_phone_number);
 
@@ -70,7 +60,7 @@ class HomeController extends Controller
             $twilio->message($to_phone_number, 'Your Buildeasy Verification code is: 5045');
 
             dd('done');
-        }catch(TwilioException $e){
+        }catch(\Exception $e){
             dd($e);
         }
 
