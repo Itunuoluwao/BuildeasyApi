@@ -38,6 +38,40 @@ class SupplierController extends Controller
 
     }
 
+    public function verifySupplerPhone(Request $request){
+
+        if(!isset($request->supplier_id)){
+            return response()->json([
+                'message' => 'No supplier_id specified'
+            ]);
+        }else{
+            $query = Supplier::where('supplier_id', '=', $request->supplier_id);
+            $supplier = $query->get();
+
+            if(!$query->exists()){
+
+                return response()->json([
+                    'error' => 1,
+                    'error_message' => "No Supplier by this id "
+                ]);
+
+            }else {
+
+
+                $user = $query->first();
+
+                return response()->json([
+                    'error' => 0,
+                    'code' => rand(1000, 9999)
+                ]);
+            }
+        }
+
+
+    }
+
+
+
     public function createSupplier(Request $request){
 
         $data = $request->json()->all();
@@ -89,7 +123,7 @@ class SupplierController extends Controller
             ]);
         }else{
             $query = Supplier::where('supplier_id', '=', $request->supplier_id);
-            $supplier = $query->get();
+            $supplier = $query->first();
 
             if(!$query->exists()){
 

@@ -29,6 +29,7 @@ Route::group(['guard' => 'auth:api'], function(){
     Route::get('/suppliers', 'SupplierController@index')->middleware('ApiKey');
     Route::get('/suppliers/{supplier_id}', 'SupplierController@getSupplier')->middleware('ApiKey');
     Route::post('/suppliers/createNewSupplier', 'SupplierController@createSupplier')->middleware('ApiKey');
+    Route::get('/suppliers/verifyPhone/{supplier_id}', 'SupplierController@verifySupplerPhone');
 
 
 //Order Routes
@@ -89,3 +90,4 @@ Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->middleware('verified');
 Route::get('/sendNotification', 'HomeController@sendNotification');
 Route::get('/sendSms', 'HomeController@sendSms');
+Route::get('/testPhoneAuth', 'SupplierController@testPhoneAuth');
