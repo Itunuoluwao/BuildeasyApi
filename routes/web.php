@@ -29,6 +29,7 @@ Route::group(['guard' => 'auth:api'], function(){
     Route::get('/suppliers', 'SupplierController@index')->middleware('ApiKey');
     Route::get('/suppliers/{supplier_id}', 'SupplierController@getSupplier')->middleware('ApiKey');
     Route::post('/suppliers/createNewSupplier', 'SupplierController@createSupplier')->middleware('ApiKey');
+    Route::get('/newSupplier/sendVerification/{supplier_id}', 'SupplierController@sendVerification');
     Route::get('/suppliers/verifyPhone/{supplier_id}', 'SupplierController@verifySupplerPhone');
 
 
